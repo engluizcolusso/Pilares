@@ -1,0 +1,33 @@
+'''
+#Acessar o arquivo do excel
+path = "C:\\Users\\EngLu\\OneDrive\\Área de Trabalho\\Pilar teste.xlsx"
+excel=pd.read_excel(path)
+#Criar listas conforme colunas do excel
+numeros=excel['numero']
+posicoes=excel['posicao']
+comprimentos=excel['comprimento']
+resistencias=excel['resistencia']
+solicitacoes=excel['solicitacao']
+
+#Cria a quantidade de pilares informadas no input
+pilares={}
+for i in range(1,qtd_pilares+1):
+    pilares[f'pilar{i}']=Pilar(numero=i)
+    
+#Atribui os valores do excel ao atributos dos pilares
+for pilar_name, pilar in pilares.items():
+    numero_do_pilar=pilar.numero
+    filtro=excel[excel['numero']==numero_do_pilar] #Filtra o excel conforme numero do pilar
+    for i in range(len(filtro)):
+        pilar.add_propriedade(
+        posicao=posicoes [i],
+        comprimento=comprimentos[i],
+        resistencia=resistencias[i],
+        solicitacao=solicitacoes[i])
+        
+#Imprime os valores separados por pilar
+for pilar_name, pilar in pilares.items():
+    print("Pilar "+str(pilar.numero))
+    for posicao in pilar.propriedades.keys():
+        print(pilar.propriedades[posicao])
+'''
